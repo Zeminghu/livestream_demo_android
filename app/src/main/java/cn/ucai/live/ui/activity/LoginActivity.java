@@ -26,7 +26,7 @@ import cn.ucai.live.utils.L;
 import cn.ucai.live.utils.MD5;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via email/etPassword.
  */
 public class LoginActivity extends BaseActivity {
 
@@ -77,7 +77,9 @@ public class LoginActivity extends BaseActivity {
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
       }
     });
-
+if (LiveHelper.getInstance().getCurrentUsernName()!=null){
+  mEmailView.setText(LiveHelper.getInstance().getCurrentUsernName());
+}
 
   }
 
@@ -99,7 +101,7 @@ public class LoginActivity extends BaseActivity {
     boolean cancel = false;
     View focusView = null;
 
-    // Check for a valid password, if the user entered one.
+    // Check for a valid etPassword, if the user entered one.
     if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
       mPasswordView.setError(getString(R.string.error_invalid_password));
       focusView = mPasswordView;
