@@ -41,7 +41,7 @@ public class NetDao {
     }
 
     public static void login(Context context, String username, String password,
-                             OkHttpUtils.OnCompleteListener<String> listener) {
+                             OnCompleteListener<String> listener){
         OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_LOGIN)
                 .addParam(I.User.USER_NAME, username)
@@ -126,8 +126,8 @@ public class NetDao {
     }
 
     public static void addGroupMembers(Context context, String members, String hxid,
-                                      OnCompleteListener<String> listener){
-OkHttpUtils<String> utils=new OkHttpUtils<>(context);
+                                       OnCompleteListener<String> listener){
+        OkHttpUtils<String> utils=new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_ADD_GROUP_MEMBERS)
                 .addParam(I.Member.USER_NAME,members)
                 .addParam(I.Member.GROUP_HX_ID,hxid)
@@ -160,6 +160,13 @@ OkHttpUtils<String> utils=new OkHttpUtils<>(context);
         OkHttpUtils<String> utils=new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_DELETE_GROUP_BY_HXID)
                 .addParam(I.Group.HX_ID,hxid)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+    public static void loadLiveList(Context context, OnCompleteListener listener){
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_GET_ALL_CHATROOM)
                 .targetClass(String.class)
                 .execute(listener);
     }
