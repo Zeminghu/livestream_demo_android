@@ -22,7 +22,6 @@ import com.hyphenate.chat.EMClient;
 import cn.ucai.live.LiveHelper;
 import cn.ucai.live.R;
 import cn.ucai.live.data.local.LiveDBManager;
-import cn.ucai.live.utils.L;
 import cn.ucai.live.utils.MD5;
 
 /**
@@ -77,9 +76,9 @@ public class LoginActivity extends BaseActivity {
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
       }
     });
-if (LiveHelper.getInstance().getCurrentUsernName()!=null){
-  mEmailView.setText(LiveHelper.getInstance().getCurrentUsernName());
-}
+    if (LiveHelper.getInstance().getCurrentUsernName()!=null){
+      mEmailView.setText(LiveHelper.getInstance().getCurrentUsernName());
+    }
 
   }
 
@@ -127,7 +126,8 @@ if (LiveHelper.getInstance().getCurrentUsernName()!=null){
       // Show a progress spinner, and kick off a background task to
       // perform the user login attempt.
       showProgress(true);
-      // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
+      // After logout，the DemoDB may still be accessed due to async callback,
+      // so the DemoDB will be re-opened again.
       // close it before login to make sure DemoDB not overlap
       LiveDBManager.getInstance().closeDB();
 
@@ -140,9 +140,7 @@ if (LiveHelper.getInstance().getCurrentUsernName()!=null){
   }
 
   private void loginEMServer(String email, String password) {
-    String p=MD5.getMessageDigest(password);
-    L.e("login","p="+p);
-    EMClient.getInstance().login(email, p, new EMCallBack() {
+    EMClient.getInstance().login(email, MD5.getMessageDigest(password), new EMCallBack() {
       @Override public void onSuccess() {
         loginSuccess();
 //        startActivity(new Intent(LoginActivity.this, MainActivity.class));

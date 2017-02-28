@@ -43,7 +43,7 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-   String username,usernick,password;
+    String username,usernick,password;
     ProgressDialog pd;
 
     @Override
@@ -100,11 +100,13 @@ public class RegisterActivity extends BaseActivity {
             }
         });
     }
+
     private void registerAppSever() {
         //注册自己的服务器的账号
         NetDao.register(this, username, usernick, password, new OnCompleteListener<String>() {
             @Override
             public void onSuccess(String s) {
+                L.e(TAG, "register,s=" + s);
                 if (s != null) {
                     Result result = ResultUtils.getResultFromJson(s, null);
                     if (result != null) {
@@ -126,7 +128,6 @@ public class RegisterActivity extends BaseActivity {
                 } else {
                     pd.dismiss();
                     CommonUtils.showShortToast(R.string.Registration_failed);
-
                 }
             }
 
@@ -134,9 +135,9 @@ public class RegisterActivity extends BaseActivity {
             public void onError(String error) {
                 pd.dismiss();
                 CommonUtils.showShortToast(R.string.Registration_failed);
+                L.e(TAG, "error=" + error);
             }
         });
-
     }
 
     private void registerEMServer() {
@@ -152,14 +153,13 @@ public class RegisterActivity extends BaseActivity {
                             // save current user
                             LiveHelper.getInstance().setCurrentUserName(username);
                             showToast(getResources().getString(R.string.Registered_successfully));
-                            startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                             finish();
                         }
                     });
                 } catch (final HyphenateException e) {
                     //取消注册
                     unRegisterAppSever();
-
                     runOnUiThread(new Runnable() {
                         public void run() {
                             if (!RegisterActivity.this.isFinishing())
@@ -180,8 +180,6 @@ public class RegisterActivity extends BaseActivity {
                     });
                 }
             }
-
-
         }).start();
     }
 
