@@ -15,9 +15,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import cn.ucai.live.R;
+
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+
+import cn.ucai.live.LiveHelper;
+import cn.ucai.live.R;
+import cn.ucai.live.data.local.LiveDBManager;
+import cn.ucai.live.utils.L;
+import cn.ucai.live.utils.MD5;
 
 /**
  * A login screen that offers login via email/password.
@@ -119,28 +125,52 @@ public class LoginActivity extends BaseActivity {
       // Show a progress spinner, and kick off a background task to
       // perform the user login attempt.
       showProgress(true);
-      EMClient.getInstance().login(email, password, new EMCallBack() {
-        @Override public void onSuccess() {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
+      // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
+      // close it before login to make sure DemoDB not overlap
+      LiveDBManager.getInstance().closeDB();
 
-        @Override public void onError(int i, final String s) {
-          runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-              showProgress(false);
-              mPasswordView.setError(s);
-              mPasswordView.requestFocus();
-            }
-          });
-        }
+      // reset current user name before login
+      LiveHelper.getInstance().setCurrentUserName(email);
 
-        @Override public void onProgress(int i, String s) {
-        }
-      });
-
+      final long start = System.currentTimeMillis();
+      loginEMServer(email, password);
     }
+  }
+
+  private void loginEMServer(String email, String password) {
+    String p=MD5.getMessageDigest(password);
+    L.e("login","p="+p);
+    EMClient.getInstance().login(email, p, new EMCallBack() {
+      @Override public void onSuccess() {
+        loginSuccess();
+//        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//        finish();
+      }
+
+      @Override public void onError(int i, final String s) {
+        runOnUiThread(new Runnable() {
+          @Override
+          public void run() {
+            showProgress(false);
+            mPasswordView.setError(s);
+            mPasswordView.requestFocus();
+          }
+        });
+      }
+
+      @Override public void onProgress(int i, String s) {
+      }
+    });
+  }
+
+  private void loginSuccess() {
+// get user's info (this should be get from App's server or 3rd party service)
+    LiveHelper.getInstance().asyncGetCurrentUserInfo(this);
+
+    Intent intent = new Intent(LoginActivity.this,
+            MainActivity.class);
+    startActivity(intent);
+    finish();
   }
 
   private boolean isEmailValid(String email) {
