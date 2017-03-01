@@ -110,4 +110,32 @@ public class ResultUtils {
 //        }
 //        return  null;
 //    }
+public static <T> List<T> getEMResultFromJson(String jsonStr,Class<T> clazz){
+//    Result result = new Result();
+    try {
+        JSONObject jsonObject = new JSONObject(jsonStr);
+        if(!jsonObject.isNull("data")) {
+            JSONArray array = jsonObject.getJSONArray("data");
+            if (array != null) {
+//                Pager pager = new Pager();
+//                pager.setCurrentPage(jsonPager.getInt("currentPage"));
+//                pager.setMaxRecord(jsonPager.getInt("maxRecord"));
+//                JSONArray array = jsonPager.getJSONArray("pageData");
+                List<T> list = new ArrayList<T>();
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject jsonGroupAvatar = array.getJSONObject(i);
+                    T ga = new Gson().fromJson(jsonGroupAvatar.toString(), clazz);
+                    list.add(ga);
+                }
+//                pager.setPageData(list);
+//                result.setRetData(pager);
+                return list;
+            }
+        }
+        return null;
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+    return  null;
+}
 }
