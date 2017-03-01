@@ -95,8 +95,8 @@
 
     <!--contact-->
     <string name="addcontact_title">添加联系人</string>
-    <string name="addcontact_search">正在查找联系人...</string>
-    <string name="addcontact_adding">正在添加...</string>
+    <string name="addcontact_search">正在查找联系人……</string>
+    <string name="addcontact_adding">正在添加……</string>
     <string name="addcontact_send_msg">发送</string>
     <string name="addcontact_send_msg_title">你需要发送验证申请,等对方通过</string>
     <string name="addcontact_send_msg_prefix">我是</string>
@@ -133,4 +133,5 @@
     <string name="setting_txt_about">关于微信</string>
     <string name="setting_btn_exit">退出登录</string>
     <string name="msg_1">msg_1</string>
+  <string name="now_refresh">刷新中……</string>
 </resources>
