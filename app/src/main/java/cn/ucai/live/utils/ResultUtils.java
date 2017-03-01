@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -80,6 +81,33 @@ public class ResultUtils {
         return  null;
     }
 
+    public static String getEMResultFromJson(String jsonStr) {
+        try {
+            JSONObject jsonObject = new JSONObject(jsonStr);
+            if (!jsonObject.isNull("data")) {
+                JSONObject data = jsonObject.getJSONObject("data");
+                if (!data.isNull("id")) {
+                    String id = data.getString("id");
+                    return id;
+                }
+//                JSONArray array = jsonObject.getJSONArray("data");
+//                if (array != null) {
+//                    List<T> list = new ArrayList<T>();
+//                    for(int i=0;i<array.length();i++) {
+//                        JSONObject jsonGroupAvatar = array.getJSONObject(i);
+//                        T ga = new Gson().fromJson(jsonGroupAvatar.toString(), clazz);
+//                        list.add(ga);
+//                    }
+//                    return list;
+//                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 //    public static <T> Result getPageResultFromJson(String jsonStr,Class<T> clazz){
 //        Result result = new Result();
 //        try {
@@ -110,32 +138,4 @@ public class ResultUtils {
 //        }
 //        return  null;
 //    }
-public static <T> List<T> getEMResultFromJson(String jsonStr,Class<T> clazz){
-//    Result result = new Result();
-    try {
-        JSONObject jsonObject = new JSONObject(jsonStr);
-        if(!jsonObject.isNull("data")) {
-            JSONArray array = jsonObject.getJSONArray("data");
-            if (array != null) {
-//                Pager pager = new Pager();
-//                pager.setCurrentPage(jsonPager.getInt("currentPage"));
-//                pager.setMaxRecord(jsonPager.getInt("maxRecord"));
-//                JSONArray array = jsonPager.getJSONArray("pageData");
-                List<T> list = new ArrayList<T>();
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject jsonGroupAvatar = array.getJSONObject(i);
-                    T ga = new Gson().fromJson(jsonGroupAvatar.toString(), clazz);
-                    list.add(ga);
-                }
-//                pager.setPageData(list);
-//                result.setRetData(pager);
-                return list;
-            }
-        }
-        return null;
-    }catch (Exception e){
-        e.printStackTrace();
-    }
-    return  null;
-}
 }

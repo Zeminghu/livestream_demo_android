@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,7 +46,7 @@ public class LiveListFragment extends Fragment {
     private static final String TAG = LiveListFragment.class.getSimpleName();
 
     //    private ProgressBar pb;
-//    private ListView listView;
+    private ListView listView;
     private LiveAdapter adapter;
     private List<EMChatRoom> chatRoomList;
     private boolean isLoading;
@@ -63,10 +64,9 @@ public class LiveListFragment extends Fragment {
     private List<EMChatRoom> rooms;
     View footView;
     RecyclerView recyclerView;
+    GridLayoutManager gm;
     SwipeRefreshLayout mSrl;
     TextView mTvRefresh;
-    GridLayoutManager gm;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,8 +91,8 @@ public class LiveListFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new GridMarginDecoration(6));
 //        recyclerView.setAdapter(adapter);
-        mSrl=(SwipeRefreshLayout) getView().findViewById(R.id.srl);
-        mTvRefresh=(TextView) getView().findViewById(R.id.tv_refresh);
+        mSrl = (SwipeRefreshLayout) getView().findViewById(R.id.srl);
+        mTvRefresh = (TextView) getView().findViewById(R.id.tv_refresh);
 
         footLoadingLayout = (LinearLayout) getView().findViewById(R.id.loading_layout);
         footLoadingPB = (ProgressBar)getView().findViewById(R.id.loading_bar);
@@ -105,6 +105,7 @@ public class LiveListFragment extends Fragment {
     }
 
     private void setListener() {
+
         setChatRoomChangeListener();
         setPullDownListener();
         setPullUpListener();
@@ -130,12 +131,10 @@ public class LiveListFragment extends Fragment {
                     });
                 }
             }
-
             @Override
             public void onMemberJoined(String s, String s1) {
 
             }
-
             @Override
             public void onMemberExited(String s, String s1, String s2) {
 
@@ -154,10 +153,10 @@ public class LiveListFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(newState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE){
-                        int lasPos = gm.findLastVisibleItemPosition();
-                        if(hasMoreData && !isLoading && lasPos == chatRoomList.size()-1){
-                            loadAndShowData();
-                        }
+                    int lasPos = gm.findLastVisibleItemPosition();
+                    if(hasMoreData && !isLoading && lasPos == chatRoomList.size()-1){
+                        loadAndShowData();
+                    }
                 }
             }
 
@@ -170,7 +169,7 @@ public class LiveListFragment extends Fragment {
         });
     }
 
-    private void setPullDownListener(){
+    private void setPullDownListener() {
         mSrl.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -198,7 +197,6 @@ public class LiveListFragment extends Fragment {
                             mSrl.setRefreshing(false);
                             mTvRefresh.setVisibility(View.GONE);
                             chatRoomList.addAll(chatRooms);
-                            L.e(TAG,"chatRooms="+chatRooms.size());
                             if(chatRooms.size() != 0){
                                 cursor = result.getCursor();
                                 if(chatRooms.size() == pagesize)
@@ -213,7 +211,6 @@ public class LiveListFragment extends Fragment {
 //                                rooms.addAll(chatRooms);
                             }else{
                                 if(chatRooms.size() < pagesize){
-                                    L.e(TAG,"No more data");
                                     hasMoreData = false;
                                     footLoadingLayout.setVisibility(View.VISIBLE);
                                     footLoadingPB.setVisibility(View.GONE);
@@ -280,8 +277,14 @@ public class LiveListFragment extends Fragment {
                 public void onClick(View v) {
                     final int position = holder.getAdapterPosition();
                     if (position == RecyclerView.NO_POSITION) return;
-                    context.startActivity(new Intent(context, LiveDetailsActivity.class)
-                            .putExtra("liveroom", liveRoomList.get(position)));
+                    LiveRoom room = liveRoomList.get(position);
+                    if (room.getAnchorId().equals(EMClient.getInstance().getCurrentUser())) {
+                        context.startActivity(new Intent(context,StartLiveActivity.class)
+                                .putExtra("liveId",room.getId()));
+                    } else {
+                        context.startActivity(new Intent(context, LiveDetailsActivity.class)
+                                .putExtra("liveroom", liveRoomList.get(position)));
+                    }
                 }
             });
             return holder;
