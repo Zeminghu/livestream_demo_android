@@ -1,13 +1,11 @@
 package com.hyphenate.easeui.utils;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.controller.EaseUI.EaseUserProfileProvider;
@@ -129,7 +127,7 @@ public class EaseUserUtils {
     }
 
     public static String getGroupAvatarPath(String hxid) {
-        String path = "http://101.251.196.90:8000/SuperWeChatServerV2.0/downloadAvatar?name_or_hxid="
+        String path = "http://101.251.196.91:8888/SuperWeChatServerV2.0/downloadAvatar?name_or_hxid="
                 + hxid + "&avatarType=group_icon&m_avatar_suffix=.jpg";
         return path;
     }
