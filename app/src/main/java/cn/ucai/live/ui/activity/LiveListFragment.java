@@ -215,14 +215,14 @@ public class LiveListFragment extends Fragment {
                                 recyclerView.setAdapter(adapter);
 //                                rooms.addAll(chatRooms);
                             }else{
-                                if(chatRooms.size() < pagesize){
-//                                    L.e(TAG,"No more data");
-                                    hasMoreData = false;
-                                    footLoadingLayout.setVisibility(View.VISIBLE);
-                                    footLoadingPB.setVisibility(View.GONE);
-                                    footLoadingText.setText("没有更多数据了");
-                                }
                                 adapter.notifyDataSetChanged();
+                            }
+                            if(chatRooms.size() < pagesize){
+//                                    L.e(TAG,"No more data");
+                                hasMoreData = false;
+                                footLoadingLayout.setVisibility(View.VISIBLE);
+                                footLoadingPB.setVisibility(View.GONE);
+                                footLoadingText.setText("没有更多数据了");
                             }
                             isLoading = false;
                         }
