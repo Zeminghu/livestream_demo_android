@@ -236,7 +236,7 @@ public class LiveListFragment extends Fragment {
                             mSrl.setRefreshing(false);
                             mTvRefresh.setVisibility(View.GONE);
 //                            pb.setVisibility(View.INVISIBLE);
-                            footLoadingLayout.setVisibility(View.GONE);
+//                            footLoadingLayout.setVisibility(View.GONE);
                             Toast.makeText(getContext(), getResources().getString(R.string.failed_to_load_data), Toast.LENGTH_SHORT).show();
                         }
                     });
