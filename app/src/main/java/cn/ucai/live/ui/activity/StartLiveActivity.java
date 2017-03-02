@@ -31,7 +31,6 @@ import com.ucloud.live.UEasyStreaming;
 import com.ucloud.live.UStreamingProfile;
 import com.ucloud.live.widget.UAspectFrameLayout;
 
-import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -39,8 +38,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ucai.live.R;
 import cn.ucai.live.data.NetDao;
-import cn.ucai.live.data.TestDataRepository;
-import cn.ucai.live.data.model.LiveRoom;
 import cn.ucai.live.data.model.LiveSettings;
 import cn.ucai.live.utils.CommonUtils;
 import cn.ucai.live.utils.L;
@@ -290,12 +287,13 @@ public class StartLiveActivity extends LiveBaseActivity
     private void showConfirmCloseLayout() {
         //显示封面
         coverImage.setVisibility(View.VISIBLE);
-        List<LiveRoom> liveRoomList = TestDataRepository.getLiveRoomList();
-        for (LiveRoom liveRoom : liveRoomList) {
-            if (liveRoom.getId().equals(liveId)) {
-                coverImage.setImageResource(liveRoom.getCover());
-            }
-        }
+        EaseUserUtils.setAppUserAvatar(StartLiveActivity.this,EMClient.getInstance().getCurrentUser(),coverImage);
+//    List<LiveRoom> liveRoomList = TestDataRepository.getLiveRoomList();
+//    for (LiveRoom liveRoom : liveRoomList) {
+//      if (liveRoom.getId().equals(liveId)) {
+//        coverImage.setImageResource(liveRoom.getCover());
+//      }
+//    }
         View view = liveEndLayout.inflate();
         Button closeConfirmBtn = (Button) view.findViewById(R.id.live_close_confirm);
         TextView usernameView = (TextView) view.findViewById(R.id.tv_username);
