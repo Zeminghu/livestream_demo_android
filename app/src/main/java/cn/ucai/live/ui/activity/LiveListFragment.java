@@ -207,15 +207,16 @@ public class LiveListFragment extends Fragment {
                                 if(chatRooms.size() == pagesize)
                                     footLoadingLayout.setVisibility(View.VISIBLE);
                             }
-//                            if(isFirstLoading){
+                            if(isFirstLoading){
 //                                pb.setVisibility(View.INVISIBLE);
-                            isFirstLoading = false;
-                            adapter.initData(getLiveRoomList(chatRoomList));
+                                isFirstLoading = false;
+                                adapter.initData(getLiveRoomList(chatRoomList));
 //                                adapter = new LiveAdapter(getContext(),getLiveRoomList(chatRoomList));
 //                                recyclerView.setAdapter(adapter);
 //                                rooms.addAll(chatRooms);
 //                            }else{
-//                            }
+
+                            }
                             adapter.notifyDataSetChanged();
                             if(chatRooms.size() < pagesize){
 //                                    L.e(TAG,"No more data");
@@ -293,7 +294,7 @@ public class LiveListFragment extends Fragment {
                     L.e(TAG,"room="+room);
                     if (room.getAnchorId().equals(EMClient.getInstance().getCurrentUser())){
                         context.startActivity(new Intent(context,StartLiveActivity.class)
-                                .putExtra("liveId",room.getId()));
+                                .putExtra("liveroom", liveRoomList.get(position)));
                     }else {
                         context.startActivity(new Intent(context, LiveDetailsActivity.class)
                                 .putExtra("liveroom", liveRoomList.get(position)));
