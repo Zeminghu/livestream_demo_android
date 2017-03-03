@@ -19,6 +19,7 @@
       android:background="@android:color/transparent"
       >
     <com.hyphenate.easeui.widget.EaseImageView
+        android:id="@+id/dialog_user_avatar"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@drawable/ease_default_avatar"
@@ -117,7 +118,7 @@
           android:layout_height="30dp"
           android:background="#636363"
           android:layout_gravity="center_vertical"
-        />
+          />
 
       <Button
           android:id="@+id/btn_message"
@@ -128,7 +129,7 @@
           android:text="私信"
           android:textColor="#fff"
           android:textSize="18sp"
-        />
+          />
       <View
           android:layout_width="1dp"
           android:layout_height="30dp"
