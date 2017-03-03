@@ -17,7 +17,7 @@ public class User implements Serializable {
 	 * initial letter for nickname
 	 */
 	protected String initialLetter;
-	
+
 	public User() {
 		super();
 	}
@@ -54,7 +54,7 @@ public class User implements Serializable {
 	public void setMUserNick(String muserNick) {
 		this.muserNick = muserNick;
 	}
-	
+
 	public Integer getMAvatarId() {
 		return mavatarId;
 	}
@@ -85,7 +85,7 @@ public class User implements Serializable {
 	public void setMAvatarLastUpdateTime(String mavatarLastUpdateTime) {
 		this.mavatarLastUpdateTime = mavatarLastUpdateTime;
 	}
-	
+
 	public void setMAvatarSuffix(String mavatarSuffix) {
 		this.mavatarSuffix = mavatarSuffix;
 	}
