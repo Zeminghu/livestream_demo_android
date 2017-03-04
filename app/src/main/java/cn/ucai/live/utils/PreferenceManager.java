@@ -32,9 +32,9 @@ public class PreferenceManager {
 	private String SHARED_KEY_SETTING_SPEAKER = "shared_key_setting_speaker";
 
 	private static String SHARED_KEY_SETTING_CHATROOM_OWNER_LEAVE = "shared_key_setting_chatroom_owner_leave";
-    private static String SHARED_KEY_SETTING_DELETE_MESSAGES_WHEN_EXIT_GROUP = "shared_key_setting_delete_messages_when_exit_group";
-    private static String SHARED_KEY_SETTING_AUTO_ACCEPT_GROUP_INVITATION = "shared_key_setting_auto_accept_group_invitation";
-    private static String SHARED_KEY_SETTING_ADAPTIVE_VIDEO_ENCODE = "shared_key_setting_adaptive_video_encode";
+	private static String SHARED_KEY_SETTING_DELETE_MESSAGES_WHEN_EXIT_GROUP = "shared_key_setting_delete_messages_when_exit_group";
+	private static String SHARED_KEY_SETTING_AUTO_ACCEPT_GROUP_INVITATION = "shared_key_setting_auto_accept_group_invitation";
+	private static String SHARED_KEY_SETTING_ADAPTIVE_VIDEO_ENCODE = "shared_key_setting_adaptive_video_encode";
 	private static String SHARED_KEY_SETTING_OFFLINE_PUSH_CALL = "shared_key_setting_offline_push_call";
 
 	private static String SHARED_KEY_SETTING_GROUPS_SYNCED = "SHARED_KEY_SETTING_GROUPS_SYNCED";
@@ -44,6 +44,7 @@ public class PreferenceManager {
 	private static String SHARED_KEY_CURRENTUSER_USERNAME = "SHARED_KEY_CURRENTUSER_USERNAME";
 	private static String SHARED_KEY_CURRENTUSER_NICK = "SHARED_KEY_CURRENTUSER_NICK";
 	private static String SHARED_KEY_CURRENTUSER_AVATAR = "SHARED_KEY_CURRENTUSER_AVATAR";
+	private static String SHARED_KEY_PAYMENT_TIP = "SHARED_KEY_PAYMENT_TIP";
 
 	private static String SHARED_KEY_REST_SERVER = "SHARED_KEY_REST_SERVER";
 	private static String SHARED_KEY_IM_SERVER = "SHARED_KEY_IM_SERVER";
@@ -66,9 +67,9 @@ public class PreferenceManager {
 	}
 
 	public static synchronized void init(Context cxt){
-	    if(mPreferencemManager == null){
-	        mPreferencemManager = new PreferenceManager(cxt);
-	    }
+		if(mPreferencemManager == null){
+			mPreferencemManager = new PreferenceManager(cxt);
+		}
 	}
 
 	/**
@@ -123,40 +124,40 @@ public class PreferenceManager {
 	}
 
 	public void setSettingAllowChatroomOwnerLeave(boolean value) {
-        editor.putBoolean(SHARED_KEY_SETTING_CHATROOM_OWNER_LEAVE, value);
-        editor.apply();
-    }
+		editor.putBoolean(SHARED_KEY_SETTING_CHATROOM_OWNER_LEAVE, value);
+		editor.apply();
+	}
 
 	public boolean getSettingAllowChatroomOwnerLeave() {
-        return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_CHATROOM_OWNER_LEAVE, true);
-    }
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_CHATROOM_OWNER_LEAVE, true);
+	}
 
-    public void setDeleteMessagesAsExitGroup(boolean value){
-        editor.putBoolean(SHARED_KEY_SETTING_DELETE_MESSAGES_WHEN_EXIT_GROUP, value);
-        editor.apply();
-    }
+	public void setDeleteMessagesAsExitGroup(boolean value){
+		editor.putBoolean(SHARED_KEY_SETTING_DELETE_MESSAGES_WHEN_EXIT_GROUP, value);
+		editor.apply();
+	}
 
-    public boolean isDeleteMessagesAsExitGroup() {
-        return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_DELETE_MESSAGES_WHEN_EXIT_GROUP, true);
-    }
+	public boolean isDeleteMessagesAsExitGroup() {
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_DELETE_MESSAGES_WHEN_EXIT_GROUP, true);
+	}
 
-    public void setAutoAcceptGroupInvitation(boolean value) {
-        editor.putBoolean(SHARED_KEY_SETTING_AUTO_ACCEPT_GROUP_INVITATION, value);
-        editor.commit();
-    }
+	public void setAutoAcceptGroupInvitation(boolean value) {
+		editor.putBoolean(SHARED_KEY_SETTING_AUTO_ACCEPT_GROUP_INVITATION, value);
+		editor.commit();
+	}
 
-    public boolean isAutoAcceptGroupInvitation() {
-        return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_AUTO_ACCEPT_GROUP_INVITATION, true);
-    }
+	public boolean isAutoAcceptGroupInvitation() {
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_AUTO_ACCEPT_GROUP_INVITATION, true);
+	}
 
-    public void setAdaptiveVideoEncode(boolean value) {
-        editor.putBoolean(SHARED_KEY_SETTING_ADAPTIVE_VIDEO_ENCODE, value);
-        editor.apply();
-    }
+	public void setAdaptiveVideoEncode(boolean value) {
+		editor.putBoolean(SHARED_KEY_SETTING_ADAPTIVE_VIDEO_ENCODE, value);
+		editor.apply();
+	}
 
-    public boolean isAdaptiveVideoEncode() {
-        return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_ADAPTIVE_VIDEO_ENCODE, false);
-    }
+	public boolean isAdaptiveVideoEncode() {
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_ADAPTIVE_VIDEO_ENCODE, false);
+	}
 
 	public void setPushCall(boolean value) {
 		editor.putBoolean(SHARED_KEY_SETTING_OFFLINE_PUSH_CALL, value);
@@ -166,33 +167,33 @@ public class PreferenceManager {
 	public boolean isPushCall() {
 		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_OFFLINE_PUSH_CALL, false);
 	}
-    
+
 	public void setGroupsSynced(boolean synced){
-	    editor.putBoolean(SHARED_KEY_SETTING_GROUPS_SYNCED, synced);
-        editor.apply();
+		editor.putBoolean(SHARED_KEY_SETTING_GROUPS_SYNCED, synced);
+		editor.apply();
 	}
 
 	public boolean isGroupsSynced(){
-	    return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_GROUPS_SYNCED, false);
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_GROUPS_SYNCED, false);
 	}
 
 	public void setContactSynced(boolean synced){
-        editor.putBoolean(SHARED_KEY_SETTING_CONTACT_SYNCED, synced);
-        editor.apply();
-    }
+		editor.putBoolean(SHARED_KEY_SETTING_CONTACT_SYNCED, synced);
+		editor.apply();
+	}
 
-    public boolean isContactSynced(){
-        return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_CONTACT_SYNCED, false);
-    }
+	public boolean isContactSynced(){
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_CONTACT_SYNCED, false);
+	}
 
-    public void setBlacklistSynced(boolean synced){
-        editor.putBoolean(SHARED_KEY_SETTING_BALCKLIST_SYNCED, synced);
-        editor.apply();
-    }
+	public void setBlacklistSynced(boolean synced){
+		editor.putBoolean(SHARED_KEY_SETTING_BALCKLIST_SYNCED, synced);
+		editor.apply();
+	}
 
-    public boolean isBacklistSynced(){
-        return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_BALCKLIST_SYNCED, false);
-    }
+	public boolean isBacklistSynced(){
+		return mSharedPreferences.getBoolean(SHARED_KEY_SETTING_BALCKLIST_SYNCED, false);
+	}
 
 	public void setCurrentUserNick(String nick) {
 		editor.putString(SHARED_KEY_CURRENTUSER_NICK, nick);
@@ -202,6 +203,16 @@ public class PreferenceManager {
 	public void setCurrentUserAvatar(String avatar) {
 		editor.putString(SHARED_KEY_CURRENTUSER_AVATAR, avatar);
 		editor.apply();
+	}
+
+
+	public void setPayMentTip(boolean tip) {
+		editor.putBoolean(SHARED_KEY_PAYMENT_TIP, tip);
+		editor.apply();
+	}
+
+	public boolean getPayMentTip() {
+		return mSharedPreferences.getBoolean(SHARED_KEY_PAYMENT_TIP, false);
 	}
 
 	public String getCurrentUserNick() {
@@ -269,6 +280,7 @@ public class PreferenceManager {
 	public void removeCurrentUserInfo() {
 		editor.remove(SHARED_KEY_CURRENTUSER_NICK);
 		editor.remove(SHARED_KEY_CURRENTUSER_AVATAR);
+		editor.remove(SHARED_KEY_PAYMENT_TIP);
 		editor.apply();
 	}
 
@@ -364,7 +376,7 @@ public class PreferenceManager {
 	 * fixed video sample rate
 	 *  if no value was set, return false
 	 * @return
-     */
+	 */
 	public boolean isCallFixedVideoResolution() {
 		return mSharedPreferences.getBoolean(SHARED_KEY_CALL_FIX_SAMPLE_RATE, false);
 	}
