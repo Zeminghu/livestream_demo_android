@@ -44,6 +44,10 @@
                 android:value=".ui.activity.MainActivity" />
         </activity>
 
+        <activity android:name=".ui.activity.ChangeActivity"
+            android:screenOrientation="portrait"
+            android:launchMode="singleTop"
+            />
         <activity android:name=".ui.activity.ChatActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleTop"
@@ -60,9 +64,9 @@
             android:name=".ui.activity.RegisterActivity"
             android:parentActivityName=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.LoginActivity" />
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.SearchActivity"></activity>
 
 
