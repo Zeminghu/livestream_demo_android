@@ -222,11 +222,15 @@ public interface I {
 	/** 客户端发送的用户充值的请求 */
 	String REQUEST_RECHARGE			 				= 		"live/recharge";
 	/** 客户端发送的用户给主播赠送礼物的请求 */
-	String REQUEST_GET_ALL_CHATROOM		 				= 		"live/getAllChatRoom";
+	String REQUEST_GET_ALL_CHATROOM		 			= 		"live/getAllChatRoom";
 	/** 客户端发送的创建直播室 */
-	String REQUEST_CREATE_CHATROOM		 				= 		"live/createChatRoom";
+	String REQUEST_CREATE_CHATROOM		 			= 		"live/createChatRoom";
 	/** 客户端发送的删除直播室 */
-	String REQUEST_DELETE_CHATROOM		 				= 		"live/deleteChatRoom";
+	String REQUEST_DELETE_CHATROOM		 			= 		"live/deleteChatRoom";
+	/** 客户端分页加载送礼物流水 */
+	String REQUEST_GIVING_GIFT_STATEMENT			= 		"live/getGivingGiftStatements";
+	/** 客户端分页加载主播收礼物流水 */
+	String REQUEST_RECEIVING_GIFT_STATEMENT		 	= 		"live/getReceivingGiftStatementsServlet";
 
 
 	String BACK_MAIN_FROM_CHAT						= 		"back_main_from_chat";
@@ -236,4 +240,8 @@ public interface I {
 	int REQUESTCODE_CUTTING = 2;
 	int REQUESTCODE_MEMBER = 3;
 	int GIFT_COLUMN_COUNT = 4;
+	String GIFT_STATEMENT_TYPE = "cn.ucai.live_gift_statement_type";
+	int GIFT_STATEMENT_TYPE_GIBVING = 0;
+	int GIFT_STATEMENT_TYPE_RECEIVING = 1;
+
 }

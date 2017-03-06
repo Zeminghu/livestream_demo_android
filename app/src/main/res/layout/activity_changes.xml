@@ -6,6 +6,11 @@
     <android.support.v7.widget.Toolbar
         style="@style/ToolbarNormal"
         android:id="@+id/toolbar">
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ease_back"/>
         <TextView
             style="@style/TitleNormal"
             android:text="我的钱包"/>
@@ -93,7 +98,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_my_bankcard"
+            android:id="@+id/tv_my_giving_gift_list"
             style="@style/ChangeLeftTextViewStyle"
             android:drawableLeft="@drawable/rp_my_bankcard"
             android:text="@string/my_bank_card"/>
@@ -103,7 +108,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_my_red_packet_records"
+            android:id="@+id/tv_my_gift_records"
             style="@style/ChangeLeftTextViewStyle"
             android:layout_marginBottom="@dimen/size48px"
             android:drawableLeft="@drawable/rp_red_packet_records"
